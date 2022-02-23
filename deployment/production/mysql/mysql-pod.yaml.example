@@ -1,0 +1,61 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    app: mysql-pod
+  name: mysql-pod
+  annotations:
+    seccomp.security.alpha.kubernetes.io/pod: localhost/default.json
+spec:
+  restartPolicy: OnFailure
+  hostNetwork: true
+  containers:
+  - name: srv01
+    image: docker.io/mysql:8.0
+    securityContext:
+      allowPrivilegeEscalation: false
+      privileged: false
+      capabilities:
+        add: []
+        drop:
+        - CAP_MKNOD
+        - CAP_NET_RAW
+        - CAP_AUDIT_WRITE
+      seLinuxOptions:
+        type: mysql_podman.process
+    resources:
+      requests:
+        memory: 1000Mi
+        cpu: 1000m
+      limits:
+        memory: 1000Mi
+        cpu: 1000m
+    env:
+    - name: MYSQL_ROOT_HOST
+      valueFrom:
+        configMapKeyRef:
+          name: mysql-configmap
+          key: mysql_root_host
+    - name: MYSQL_ROOT_PASSWORD
+      valueFrom:
+        configMapKeyRef:
+          name: mysql-configmap
+          key: mysql_root_password
+    - name: MYSQL_TCP_PORT
+      valueFrom:
+        configMapKeyRef:
+          name: mysql-configmap
+          key: mysql_tcp_port
+    volumeMounts:
+    - mountPath: /etc/mysql/conf.d/custom.cnf
+      name: mysql-custom-config
+      readOnly: true
+    - mountPath: /var/lib/mysql
+      name: mysql-data
+  volumes:
+  - name: mysql-custom-config
+    hostPath:
+      path: ./configs/custom.cnf
+  - name: mysql-data
+    persistentVolumeClaim:
+      claimName: mysql-data
