@@ -29,12 +29,13 @@ From the project root directory, ``cd`` into ``deployment/production/mysql``:
 
     cd deployment/production/mysql
 
-Create config files:
+Create config files and fix permission:
 
 .. code-block:: bash
 
     cp -v configmaps/mysql.yaml{.example,}
     cp -v configs/custom.cnf{.example,}
+    chmod og+r ./configs/custom.cnf
 
 Allow config files to be mounted into container:
 
