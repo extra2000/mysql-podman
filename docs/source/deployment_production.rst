@@ -49,6 +49,10 @@ Create pod file:
 
     cp -v mysql-pod.yaml{.example,}
 
+.. note::
+
+    In the pod file, you may want to append image tag name with ``-aarch64`` if you are using Raspberry Pi. For example, ``docker.io/mysql/mysql-server:8.0-aarch64``
+
 Load SELinux security policy:
 
 .. code-block:: bash
