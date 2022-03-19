@@ -11,7 +11,7 @@ spec:
   hostNetwork: true
   containers:
   - name: srv01
-    image: docker.io/mysql:8.0
+    image: docker.io/mysql/mysql-server:8.0
     securityContext:
       allowPrivilegeEscalation: false
       privileged: false
@@ -47,7 +47,7 @@ spec:
           name: mysql-configmap
           key: mysql_tcp_port
     volumeMounts:
-    - mountPath: /etc/mysql/conf.d/custom.cnf
+    - mountPath: /etc/my.cnf
       name: mysql-custom-config
       readOnly: true
     - mountPath: /var/lib/mysql
