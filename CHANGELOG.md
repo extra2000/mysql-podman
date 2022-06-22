@@ -1,5 +1,22 @@
 # Changelog
 
+## [2.0.0](https://github.com/extra2000/mysql-podman/compare/v1.0.1...v2.0.0) (2022-06-22)
+
+
+### ⚠ BREAKING CHANGES
+
+* **pod:** MySQL image has changed from `docker.io/mysql:8.0` to `docker.io/mysql/mysql-server:8.0`
+
+### Code Refactoring
+
+* **pod:** change image to `docker.io/mysql/mysql-server:8.0` ([fbc545f](https://github.com/extra2000/mysql-podman/commit/fbc545fe73a5179170a986caa897ab6c7d991987))
+
+
+### Documentations
+
+* **config:** disable X protocol by default ([64b705d](https://github.com/extra2000/mysql-podman/commit/64b705d4df99b1c11522e9770f8bd0a4bd6aec44))
+* **deployment:** add workaround for Raspberry Pi ([fe5213f](https://github.com/extra2000/mysql-podman/commit/fe5213f3c684636a863ea188d67bd32cee3fa524))
+
 ### [1.0.1](https://github.com/extra2000/mysql-podman/compare/v1.0.0...v1.0.1) (2022-03-07)
 
 
